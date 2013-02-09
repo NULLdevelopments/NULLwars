@@ -16,5 +16,9 @@ gen/
 local.properties
 
 # Eclipse project files
-.classpath
-.project
+#.classpath
+#.project
+
+# Mac
+.DS_Store
+._.DS_Store
