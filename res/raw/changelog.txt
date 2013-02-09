@@ -1,0 +1,7 @@
+Change Log: v0.1
+
++Added 2dArray-to-Bitmap converter (supports 128x128 tilemaps comfortably)
++Added a simple drag and release touch function
++Added sprite compatibility
++Added Pinch-to-Zoom
++Added a selector (supports anti-jitter)
