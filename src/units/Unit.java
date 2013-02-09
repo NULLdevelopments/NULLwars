@@ -27,7 +27,7 @@ public class Unit {
 	private int totalHp;// hp of the squad as a whole   
 	private int intialHp;// the hp of the squad at intialization
 	private int armor;// the armor of the squad used to reduce damage in batl
-	private int nUnits; // how units are the squad
+	private int nUnits; // how many units are  in the squad
 	private int vision; // how far can it see
 	private int movement;// how far can it move
 	private int movCost;// how much fuel does movement cost per block 

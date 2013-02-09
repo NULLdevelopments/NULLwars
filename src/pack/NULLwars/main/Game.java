@@ -130,4 +130,5 @@ public class Game {
 	public int getRows(){ return rows; }
 	public int getCols(){ return cols; }
 	public int getBlockSize(){ return (int)blockSize; }
+	public UnitHandler getUnits(){ return units; }
 }

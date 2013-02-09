@@ -5,11 +5,15 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.Log;
 
+
 public class UnitHandler {
 	LinkedList<Unit> unitList;
+	UnitStats stats;
+	private int currentIndex;
 	
 	public UnitHandler(){
 		unitList = new LinkedList<Unit>();
+		stats = new UnitStats();
 		addRandomUnits();
 	}
 	public void draw(Canvas canvas, int x, int y, int blockSize, boolean alias){
@@ -29,6 +33,8 @@ public class UnitHandler {
 				unitList.get(i).getSprite().getSpriteRect(),
 				unitList.get(i).getSprite().getDestRect(), paint);
 		}
+		//unit stats
+		stats.draw(canvas);
 	}
 	public void update(){
 		
@@ -49,5 +55,28 @@ public class UnitHandler {
 		for (int i = 0; i < 5; i++){
 			add(10+(int)(Math.random()*2),0,(int)(Math.random()*128),(int)(Math.random()*128));
 		}
+	}
+	public int getUnitType(int x, int y){
+		int type = -1;
+		for(int i = 0; i<unitList.size(); i++ ){
+			 if(unitList.get(i).getX() == x && unitList.get(i).getY() == y){
+				 type = unitList.get(i).getType();
+				 break;
+			 }
+		}
+		return type;
+	}
+	public int getUnitIndex(int x, int y){
+		int index = -1;
+		for(int i = 0; i<unitList.size(); i++){
+			if(unitList.get(i).getX() == x && unitList.get(i).getY() == y){
+				index = i;
+			}
+		}
+		return index;
+	}
+	public void moveUnit(int index, int x, int y){
+		//will check unit path
+		unitList.get(index).setCoord(x, y);
 	}
 }
