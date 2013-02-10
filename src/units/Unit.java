@@ -30,6 +30,7 @@ public class Unit {
 	private int nUnits; // how many units are  in the squad
 	private int vision; // how far can it see
 	private int movement;// how far can it move
+	private boolean hasMoved = false;
 	private int movCost;// how much fuel does movement cost per block 
 	private int attack; // how much damage does the squad do per unit
 	private int attMin; // the minimum attack range
@@ -242,6 +243,9 @@ public class Unit {
 	public int getHealth(){
 		return totalHp;
 	}
+	public boolean getHasMoved(){
+		return hasMoved;
+	}
 	public int getGeneralType(){
 		return (type/10)*10;
 	}
@@ -283,6 +287,9 @@ public class Unit {
 		xCoord = x;
 		yCoord = y;
 		
+	}
+	public void setHasMoved(boolean foo){
+		hasMoved = foo; 
 	}
 	public void reset(){
 		cost = 500;

@@ -34,7 +34,6 @@ public class Selector {
 	}
 	public void up(int x1, int y1, int blockSize){
 		//adjust selector
-		int selectedIndex = 1;
 		if (x1/blockSize < 0) x = 0;
 		else if (x1/blockSize > MainGamePanel.game.getCols()-1) x = MainGamePanel.game.getCols()-1;
 		else x = (x1/blockSize);
@@ -43,16 +42,17 @@ public class Selector {
 		else y = (y1/blockSize);
 		hide = false;
 		//search for unit at selected tile
-		//only moves the first unit in the unit list with unlimited range
+		//moves units with unlimited range
 		if (isSelected && MainGamePanel.game.getUnits().getUnitType(x, y) == -1){
-			MainGamePanel.game.getUnits().moveUnit(selectedIndex, x, y);
+			MainGamePanel.game.getUnits().moveUnit(MainGamePanel.game.getUnits().getSelectedIndex(), x, y);
 		}
 		if (MainGamePanel.game.getUnits().getUnitType(x, y) > -1) {
 			isSelected = true;
-			selectedIndex = MainGamePanel.game.getUnits().getUnitIndex(x, y);
+			MainGamePanel.game.getUnits().setSelectedIndex(MainGamePanel.game.getUnits().getUnitIndex(x, y));
 			Log.d("TEST", "UNIT SELECTED");
 		}
 		else isSelected = false;
+		
 	}
 	public void setX(int x){ this.x=x; }
 	public void setY(int y){ this.y=y; }

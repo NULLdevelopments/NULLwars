@@ -9,7 +9,7 @@ import android.util.Log;
 public class UnitHandler {
 	LinkedList<Unit> unitList;
 	UnitStats stats;
-	private int currentIndex;
+	private int selectedIndex;
 	
 	public UnitHandler(){
 		unitList = new LinkedList<Unit>();
@@ -79,4 +79,6 @@ public class UnitHandler {
 		//will check unit path
 		unitList.get(index).setCoord(x, y);
 	}
+	public int getSelectedIndex(){ return selectedIndex;}
+	public void setSelectedIndex(int index){ selectedIndex = index;} 
 }
