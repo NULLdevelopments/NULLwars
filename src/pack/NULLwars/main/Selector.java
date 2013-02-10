@@ -44,16 +44,22 @@ public class Selector {
 		//search for unit at selected tile
 		//moves units with unlimited range
 		if (isSelected && MainGamePanel.game.getUnits().getUnitType(x, y) == -1){
-			MainGamePanel.game.getUnits().moveUnit(MainGamePanel.game.getUnits().getSelectedIndex(), x, y);
-			//MainGamePanel.game.getUnits().UnitHandler().unitList.get(MainGamePanel.game.getUnits().getSelectedIndex());
+			if(MainGamePanel.game.getUnits().getMoved() == false){
+				MainGamePanel.game.getUnits().moveUnit(MainGamePanel.game.getUnits().getSelectedIndex(), x, y);
+				MainGamePanel.game.getUnits().setMoved(true);
+				Log.d("TEST", "UNIT MOVED");
+			}			
 		}
 		if (MainGamePanel.game.getUnits().getUnitType(x, y) > -1) {
 			isSelected = true;
 			MainGamePanel.game.getUnits().setSelectedIndex(MainGamePanel.game.getUnits().getUnitIndex(x, y));
 			Log.d("TEST", "UNIT SELECTED");
 		}
-		else isSelected = false;
-		
+		else {
+			isSelected = false;
+			MainGamePanel.game.getUnits().setSelectedIndex(-1);
+			Log.d("TEST", "UNIT DESELECTED");
+		}
 	}
 	public void setX(int x){ this.x=x; }
 	public void setY(int y){ this.y=y; }

@@ -90,5 +90,9 @@ public class UnitHandler {
 		unitList.get(index).setCoord(x, y);
 	}
 	public int getSelectedIndex(){ return selectedIndex;}
-	public void setSelectedIndex(int index){ selectedIndex = index;} 
+	public void setSelectedIndex(int index){ selectedIndex = index;}
+	public boolean getMoved(){ return unitList.get(selectedIndex).getHasMoved();}
+	public void setMoved(boolean boo){ 
+		unitList.get(selectedIndex).setHasMoved(boo);
+	}	
 }
