@@ -28,6 +28,10 @@ public class TileMap {
 		terrain.update(x,y,cols*blockSize,rows*blockSize);
 		canvas.drawBitmap(terrain.getBitmap(), terrain.getSpriteRect(), terrain.getDestRect(), paint);
 	}
+	public Tile getTile(int x, int y) {
+		return board[x][y];
+		
+	}
 	public void setRows(int rows){ this.rows=rows; }
 	public void setCols(int cols){ this.cols=cols; }
 	

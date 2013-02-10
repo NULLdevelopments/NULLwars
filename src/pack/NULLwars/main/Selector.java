@@ -45,6 +45,7 @@ public class Selector {
 		//moves units with unlimited range
 		if (isSelected && MainGamePanel.game.getUnits().getUnitType(x, y) == -1){
 			MainGamePanel.game.getUnits().moveUnit(MainGamePanel.game.getUnits().getSelectedIndex(), x, y);
+			//MainGamePanel.game.getUnits().UnitHandler().unitList.get(MainGamePanel.game.getUnits().getSelectedIndex());
 		}
 		if (MainGamePanel.game.getUnits().getUnitType(x, y) > -1) {
 			isSelected = true;
