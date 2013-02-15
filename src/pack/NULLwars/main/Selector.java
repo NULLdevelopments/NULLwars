@@ -20,6 +20,7 @@ public class Selector {
 		sprite = MainGamePanel.texture.selector;
 		hide = true;
 	}
+	
 	public void draw(Canvas canvas, int x1, int y1, int blockSize, boolean alias){
 		Paint paint = new Paint();
 		paint.setAntiAlias(alias);
@@ -32,12 +33,18 @@ public class Selector {
 			canvas.drawBitmap(sprite.getBitmap(), sprite.getSpriteRect(), sprite.getDestRect(), paint);
 		}
 	}
+	
+	// The action of touching the screen initially
 	public void down(int x1, int y1){
 		
 	}
+	
+	// Drag finger on screen
 	public void move(int x1, int y1){
 		
 	}
+	
+	// Already touching the screen, finger leaves screen
 	public void up(int x1, int y1, int blockSize){
 		//adjust selector
 		if (x1/blockSize < 0) x = 0;
@@ -58,11 +65,13 @@ public class Selector {
 		}
 		if (MainGamePanel.game.getUnits().getUnitType(x, y) > -1) {
 			isSelected = true;
+			MainGamePanel.game.getUnits().select(x, y);
 			MainGamePanel.game.getUnits().setSelectedIndex(MainGamePanel.game.getUnits().getUnitIndex(x, y));
 			Log.d("TEST", "UNIT SELECTED");
 		}
 		else {
 			isSelected = false;
+			MainGamePanel.game.getUnits().unselect(x, y);
 			MainGamePanel.game.getUnits().setSelectedIndex(-1);
 			Log.d("TEST", "UNIT DESELECTED");
 		}

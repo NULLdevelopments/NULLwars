@@ -1,19 +1,19 @@
 package units;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Log;
+// import android.util.Log;
 
 
 public class UnitHandler {
-	LinkedList<Unit> unitList;
-	UnitStats stats;
+	public ArrayList<Unit> unitList;
+	// UnitStats stats;
 	private int selectedIndex;
 	
 	public UnitHandler(){
 
-		unitList = new LinkedList<Unit>();
+		unitList = new ArrayList<Unit>();
 		//stats = new UnitStats();
 		addRandomUnits();
 	}
@@ -85,6 +85,23 @@ public class UnitHandler {
 		}
 		return index;
 	}
+	
+	public void select(int x, int y) {
+		for (int i = 0; i < unitList.size(); i++) {
+			if (unitList.get(i).getX() == x && unitList.get(i).getY() == y) {
+				unitList.get(i).setSelected(true);
+			}
+		}
+	}
+	
+	public void unselect(int x, int y) {
+		for (int i = 0; i < unitList.size(); i++) {
+			if (unitList.get(i).getX() == x && unitList.get(i).getY() == y) {
+				unitList.get(i).setSelected(false);
+			}
+		}
+	}
+	
 	public void moveUnit(int index, int x, int y){
 		//will check unit path
 		unitList.get(index).setCoord(x, y);

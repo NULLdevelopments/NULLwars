@@ -1,6 +1,7 @@
 package units;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 import pack.NULLwars.main.MainGamePanel;
 import textures.TextureHandler;
 
@@ -38,6 +39,7 @@ public class Unit {
 	private int fuel; // how much fuel can it hold
 	private int rank;// its rank, used to buff there states
 	private boolean alive; // is it alive?
+	private boolean isSelected;
 	private TextureHandler sprite;
 	
 	//makes a new unit based on input from the game engine
@@ -290,6 +292,11 @@ public class Unit {
 	}
 	public void setHasMoved(boolean foo){
 		hasMoved = foo; 
+	}
+	public void setSelected(boolean setSelect) {
+		isSelected = setSelect;
+		Log.d("Unit: Select Test", "setSelected: " + isSelected);
+		Log.d("Unit: x, y", "x, y: " + getX() + " " + getY());
 	}
 	public void reset(){
 		cost = 500;
