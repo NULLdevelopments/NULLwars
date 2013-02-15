@@ -1,5 +1,11 @@
 package pack.NULLwars.main;
 
+
+/*
+ * 
+ * COMMENT YOUR FUCKING CODE
+ * 
+ */
 import textures.TextureHandler;
 import android.graphics.Canvas;
 import android.graphics.Paint;
