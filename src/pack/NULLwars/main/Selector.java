@@ -1,5 +1,11 @@
 package pack.NULLwars.main;
 
+
+/*
+ * 
+ * COMMENT YOUR FUCKING CODE
+ * 
+ */
 import textures.TextureHandler;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -14,6 +20,7 @@ public class Selector {
 		sprite = MainGamePanel.texture.selector;
 		hide = true;
 	}
+	
 	public void draw(Canvas canvas, int x1, int y1, int blockSize, boolean alias){
 		Paint paint = new Paint();
 		paint.setAntiAlias(alias);
@@ -26,12 +33,18 @@ public class Selector {
 			canvas.drawBitmap(sprite.getBitmap(), sprite.getSpriteRect(), sprite.getDestRect(), paint);
 		}
 	}
+	
+	// The action of touching the screen initially
 	public void down(int x1, int y1){
 		
 	}
+	
+	// Drag finger on screen
 	public void move(int x1, int y1){
 		
 	}
+	
+	// Already touching the screen, finger leaves screen
 	public void up(int x1, int y1, int blockSize){
 		//adjust selector
 		if (x1/blockSize < 0) x = 0;
@@ -42,6 +55,7 @@ public class Selector {
 		else y = (y1/blockSize);
 		hide = false;
 		//moves units with unlimited range
+
 		if (MainGamePanel.game.getUnits().checkForMove(x, y) == true){
 			MainGamePanel.game.getUnits().moveSelectedUnit(x, y); //moves the selected unit
 		}		
@@ -50,6 +64,7 @@ public class Selector {
 		}
 		else {
 			MainGamePanel.game.getUnits().clearSelectedUnit(); //clears the selected unit and it''s stats menu
+
 		}
 	}
 	

@@ -3,6 +3,7 @@ package units;
 import java.util.LinkedList;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+// import android.util.Log;
 import android.util.Log;
 
 
@@ -16,6 +17,7 @@ public class UnitHandler {
 		//options = new UnitOptions();
 		unitList = new LinkedList<Unit>();
 		stats = new UnitStats();
+
 		addRandomUnits();
 	}
 
@@ -80,6 +82,7 @@ public class UnitHandler {
 		return selectedUnitIndex;
 	}
 	
+
 	public void setSelectedUnit(int x, int y){
 		selectedUnit = unitList.get(getUnitIndex(x, y)); //copies unit at the Selector into selected unit
 		stats.setUnit(selectedUnit); //creates stats for the selected unit
@@ -93,6 +96,7 @@ public class UnitHandler {
 	}
 	
 	public void moveSelectedUnit(int x, int y){
+
 		//will check unit path
 		selectedUnit.setCoord(x, y); //moves to coords x and y
 		unitList.get(selectedUnitIndex).setHasMoved(true); //flags moved
