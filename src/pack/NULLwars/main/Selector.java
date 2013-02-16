@@ -8,7 +8,7 @@ import android.util.Log;
 public class Selector {
 	private int x, y;
 	private TextureHandler sprite;
-	private boolean hide, isSelected;
+	private boolean hide;
 	
 	public Selector(){
 		sprite = MainGamePanel.texture.selector;
@@ -41,30 +41,21 @@ public class Selector {
 		else if (y1/blockSize > MainGamePanel.game.getRows()-1) y = MainGamePanel.game.getRows()-1;
 		else y = (y1/blockSize);
 		hide = false;
-		//search for unit at selected tile
 		//moves units with unlimited range
-		if (isSelected && MainGamePanel.game.getUnits().getUnitType(x, y) == -1){
-			if(MainGamePanel.game.getUnits().getMoved() == false){
-				MainGamePanel.game.getUnits().moveUnit(MainGamePanel.game.getUnits().getSelectedIndex(), x, y);
-				MainGamePanel.game.getUnits().setMoved(true);
-				Log.d("TEST", "UNIT MOVED");
-			}			
-		}
-		if (MainGamePanel.game.getUnits().getUnitType(x, y) > -1) {
-			isSelected = true;
-			MainGamePanel.game.getUnits().setSelectedIndex(MainGamePanel.game.getUnits().getUnitIndex(x, y));
-			Log.d("TEST", "UNIT SELECTED");
+		if (MainGamePanel.game.getUnits().checkForMove(x, y) == true){
+			MainGamePanel.game.getUnits().moveSelectedUnit(x, y); //moves the selected unit
+		}		
+		if (MainGamePanel.game.getUnits().checkForUnit(x, y) == true){ //checks for unit at selector
+			MainGamePanel.game.getUnits().setSelectedUnit(x, y); //sets the selected unit and generates it's stats menu
 		}
 		else {
-			isSelected = false;
-			MainGamePanel.game.getUnits().setSelectedIndex(-1);
-			Log.d("TEST", "UNIT DESELECTED");
+			MainGamePanel.game.getUnits().clearSelectedUnit(); //clears the selected unit and it''s stats menu
 		}
 	}
+	
 	public void setX(int x){ this.x=x; }
 	public void setY(int y){ this.y=y; }
 	
 	public int getX(){ return x; }
 	public int getY(){ return y; }
-	public boolean isSelected() {return isSelected;}
 }

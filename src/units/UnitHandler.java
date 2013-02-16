@@ -9,12 +9,13 @@ import android.util.Log;
 public class UnitHandler {
 	LinkedList<Unit> unitList;
 	UnitStats stats;
-	private int selectedIndex;
-	
+	private int selectedUnitIndex;
+	private Unit selectedUnit;
+	//private UnitOptions options;
 	public UnitHandler(){
-
+		//options = new UnitOptions();
 		unitList = new LinkedList<Unit>();
-		//stats = new UnitStats();
+		stats = new UnitStats();
 		addRandomUnits();
 	}
 
@@ -36,8 +37,11 @@ public class UnitHandler {
 					.getSprite().getSpriteRect(), unitList.get(i).getSprite()
 					.getDestRect(), paint);
 		}
+		//options.draw(canvas, x, y);
 		//unit stats
-		//stats.draw(canvas);
+		if(selectedUnit != null){
+			stats.draw(canvas, alias);
+		}
 	}
 
 	public void update() {
@@ -66,33 +70,56 @@ public class UnitHandler {
 		}
 	}
 
-	public int getUnitType(int x, int y){
-		int type = -1;
-		for(int i = 0; i<unitList.size(); i++ ){
-			 if(unitList.get(i).getX() == x && unitList.get(i).getY() == y){
-				 type = unitList.get(i).getType();
-				 break;
-			 }
-		}
-		return type;
-	}
 	public int getUnitIndex(int x, int y){
-		int index = -1;
-		for(int i = 0; i<unitList.size(); i++){
-			if(unitList.get(i).getX() == x && unitList.get(i).getY() == y){
-				index = i;
+		selectedUnitIndex = 0;
+		for(int i = 0; i<unitList.size(); i++){ //loops through unitList
+			if(unitList.get(i).getX() == x && unitList.get(i).getY() == y){ //Checks if unit is at Selector
+				selectedUnitIndex = i; //records unit index in unitList
 			}
 		}
-		return index;
+		return selectedUnitIndex;
 	}
-	public void moveUnit(int index, int x, int y){
+	
+	public void setSelectedUnit(int x, int y){
+		selectedUnit = unitList.get(getUnitIndex(x, y)); //copies unit at the Selector into selected unit
+		stats.setUnit(selectedUnit); //creates stats for the selected unit
+		Log.d("TEST", "UNIT SELECTED");
+	}
+	
+	public void clearSelectedUnit(){
+		selectedUnit = null; //empties the selected unit
+		stats.setUnit(null); //empties stats of the selected unit
+		Log.d("TEST", "UNIT DESELECTED");
+	}
+	
+	public void moveSelectedUnit(int x, int y){
 		//will check unit path
-		unitList.get(index).setCoord(x, y);
+		selectedUnit.setCoord(x, y); //moves to coords x and y
+		unitList.get(selectedUnitIndex).setHasMoved(true); //flags moved
+		Log.d("TEST", "UNIT MOVED");
 	}
-	public int getSelectedIndex(){ return selectedIndex;}
-	public void setSelectedIndex(int index){ selectedIndex = index;}
-	public boolean getMoved(){ return unitList.get(selectedIndex).getHasMoved();}
-	public void setMoved(boolean boo){ 
-		unitList.get(selectedIndex).setHasMoved(boo);
-	}	
+	
+	public boolean checkForMove(int x, int y){
+		boolean moving = false;
+		if(checkForUnit(x,y) == false && selectedUnit != null && !selectedUnit.getHasMoved()){ //check for nothing at Selector, something is selected
+			moving = true;																	   //and what is selected hasn't moved
+		}
+		return moving;
+	}
+	public boolean checkForUnit(int x,int y){
+		boolean unitExists = false;
+		for(int i = 0; i < unitList.size(); i++){ //Loops through unitList
+			if(unitList.get(i).getX() == x && unitList.get(i).getY() == y){ //Check if unit is at Selector
+				unitExists = true;
+				break;
+			}
+		}
+		return unitExists;
+	}
+	
+	public Unit getAt(int i){
+		return unitList.get(i);
+	}
+	
+	public UnitStats getUnitStats(){ return stats; }
 }
